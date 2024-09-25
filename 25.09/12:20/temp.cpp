@@ -13,5 +13,5 @@ int main ()
 	{
 		std::cout << word << ' ' << freg << '\n';
 	}
-	//./a.out < ujas.txt
+	//./a.out < ujas.txt >
 }
