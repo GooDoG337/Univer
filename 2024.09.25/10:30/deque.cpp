@@ -18,4 +18,4 @@ int main()
 	for(int x:d)
 	{
 		std::cout << x << "\n";
-	}*/
+	}
