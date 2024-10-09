@@ -4,7 +4,8 @@ Time::Time(int h, int m, int s)
 {
 	if(s < 0 || s > 59)
 	{
-		
+		s%=60;
+		m+= s/60;
 	}
 	if(m < 0 || m > 59)
 	{
@@ -20,19 +21,7 @@ Time::Time(int h, int m, int s)
 }
 Time::Time(int h, int m)
 {
-	m += s/60;
-	s %= 60;
-	if(s < 0) {
-		m-=1;
-		s+=60;
-	}
-	m %=60;
-	if(m < 0)
-	{
-		h-=1;
-		m+=60;
-	}
-	
+		
 }
 int Time::GetHours() const
 {

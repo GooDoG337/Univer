@@ -8,6 +8,7 @@ namespace chron {
 		int seconds;
 	public:
 		Time(int h, int m, int s);
+		Time(int h, int m);
 		int GetHours() const;
 		int GetMinutes() const;
 		int GetSeconds() const;
