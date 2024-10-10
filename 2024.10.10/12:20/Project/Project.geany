@@ -27,9 +27,9 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=2
-FILE_NAME_0=144;C++;0;EUTF-8;1;1;0;%2Fhome%2Fstud-16%2FBloxin%2FUniver%2F2024.10.10%2F12%3A20%2FProject%2Fmain.cpp;0;4
-FILE_NAME_1=782;C++;0;EUTF-8;1;1;0;%2Fhome%2Fstud-16%2FBloxin%2FUniver%2F2024.10.10%2F12%3A20%2FProject%2Ftime.cpp;0;4
+current_page=0
+FILE_NAME_0=114;C++;0;EUTF-8;1;1;0;%2Fhome%2Fstud-16%2FBloxin%2FUniver%2F2024.10.10%2F12%3A20%2FProject%2Fmain.cpp;0;4
+FILE_NAME_1=1111;C++;0;EUTF-8;1;1;0;%2Fhome%2Fstud-16%2FBloxin%2FUniver%2F2024.10.10%2F12%3A20%2FProject%2Ftime.cpp;0;4
 FILE_NAME_2=581;C++;0;EUTF-8;1;1;0;%2Fhome%2Fstud-16%2FBloxin%2FUniver%2F2024.10.10%2F12%3A20%2FProject%2Ftime.h;0;4
 
 [VTE]
