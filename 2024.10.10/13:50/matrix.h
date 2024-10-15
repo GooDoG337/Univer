@@ -10,6 +10,7 @@ private:
 public:
 	size_t GetRows() const;
 	size_t GetColumns() const;
+	Matrix(const std::vector<std::vector<T>>& d): data{d} { MakeRectangle(); }
 };
 
 #include "matrix.hpp"
