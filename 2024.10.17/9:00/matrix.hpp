@@ -82,5 +82,6 @@ std::istream operator>>(std::istream& in, const Matrix<T>& matrix)
 	}	
 	return in;
 }
-	
+
+
 #endif //MATRIX_HPP

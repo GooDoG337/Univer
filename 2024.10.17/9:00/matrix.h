@@ -51,9 +51,42 @@ public:
 			}
 		}
 		return *this;
-	} 
+	}
+	template <typename T1>
+	bool operator==(const Matrix<T1>& other) const
+	{
+		const size_t rows = GetRows();
+		const size_t columns = GetColumns();
+		if(rows != other.GetRows() || columns != other.GetColumns())
+		{
+			return false;
+		}
+		for(size_t i = 0; i != rows; ++i)
+		{
+			for(size_t j = 0; j != columns; ++j)
+			{
+				if(!(*this)(i,j) ==other(i,j))
+				{
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 };
 
+template <typename T>
+Matrix<T> operator+(const Matrix<T>& lhs, const Matrix<T>& rhs)
+{
+	auto tmp {lhs};
+	tmp+=rhs;
+	return tmp;
+}	
 
+template<typename T1, typename T2>
+bool operator!=(const Matrix<T1>& other, const Matrix<T2>& other2)
+{
+	return !(other==other2);
+}
 #include "matrix.hpp"
 #endif //MATRIX_H

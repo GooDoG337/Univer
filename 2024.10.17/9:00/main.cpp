@@ -15,8 +15,6 @@ int main()
 		{4,5,0,0},
 		{1,2,3,4}
 	});
-	Matrix<int> m2(2,2);
-	m+=mm;
-	std::cout << m;
+	std::cout << (m!=mm);
 	return 0;
 }
