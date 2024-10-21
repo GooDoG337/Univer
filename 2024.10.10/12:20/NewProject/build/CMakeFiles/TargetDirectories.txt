@@ -1,0 +1,4 @@
+/home/stud-16/Bloxin/Univer/2024.10.10/12:20/NewProject/build/CMakeFiles/myTime.dir
+/home/stud-16/Bloxin/Univer/2024.10.10/12:20/NewProject/build/CMakeFiles/Gambling.dir
+/home/stud-16/Bloxin/Univer/2024.10.10/12:20/NewProject/build/CMakeFiles/edit_cache.dir
+/home/stud-16/Bloxin/Univer/2024.10.10/12:20/NewProject/build/CMakeFiles/rebuild_cache.dir

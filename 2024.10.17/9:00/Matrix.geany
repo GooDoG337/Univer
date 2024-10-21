@@ -28,9 +28,8 @@ long_line_column=72
 
 [files]
 current_page=0
-FILE_NAME_0=159;C++;0;EUTF-8;1;1;0;%2Fhome%2Fstud-16%2FBloxin%2FUniver%2F2024.10.17%2F9%3A00%2Fmain.cpp;0;4
-FILE_NAME_1=1851;C++;0;EUTF-8;1;1;0;%2Fhome%2Fstud-16%2FBloxin%2FUniver%2F2024.10.17%2F9%3A00%2Fmatrix.h;0;4
-FILE_NAME_2=1403;C++;0;EUTF-8;1;1;0;%2Fhome%2Fstud-16%2FBloxin%2FUniver%2F2024.10.17%2F9%3A00%2Fmatrix.hpp;0;4
+FILE_NAME_0=0;CMake;0;EUTF-8;1;1;0;%2Fhome%2Fstud-16%2FBloxin%2FUniver%2F2024.10.10%2F12%3A20%2FNewProject%2FCMakeLists.txt;0;4
+FILE_NAME_1=0;C++;0;EUTF-8;1;1;0;%2Fhome%2Fstud-16%2FBloxin%2FUniver%2F2024.10.10%2F12%3A20%2FNewProject%2Fctime.cpp;0;4
 
 [VTE]
 last_dir=/home/stud-16

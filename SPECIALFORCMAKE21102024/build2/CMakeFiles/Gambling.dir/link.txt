@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/Gambling.dir/main.cpp.o -o Gambling  libmyTime.a 

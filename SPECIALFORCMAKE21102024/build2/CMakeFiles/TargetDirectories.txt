@@ -1,0 +1,4 @@
+/home/stud-16/Bloxin/Univer/SPECIALFORCMAKE21102024/build2/CMakeFiles/myTime.dir
+/home/stud-16/Bloxin/Univer/SPECIALFORCMAKE21102024/build2/CMakeFiles/Gambling.dir
+/home/stud-16/Bloxin/Univer/SPECIALFORCMAKE21102024/build2/CMakeFiles/edit_cache.dir
+/home/stud-16/Bloxin/Univer/SPECIALFORCMAKE21102024/build2/CMakeFiles/rebuild_cache.dir

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "time.h"
+#include "ctime.h"
 bool isAfternoon(const chron::Time& time)
 {
 	return time.GetHours() >= 12;

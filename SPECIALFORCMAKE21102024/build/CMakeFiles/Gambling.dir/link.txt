@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/Gambling.dir/main.cpp.o -o Gambling  -Wl,-rpath,/home/stud-16/Bloxin/Univer/SPECIALFORCMAKE21102024/build libmyTime.so 
