@@ -1,83 +1,150 @@
 #include <iostream>
 #include <iterator>
 #include <math.h>
-/*struct WrongAgeException {
-    int age;
-};
 
-int RealAge() {
-    std::cin.exceptions(std::istream::failbit);
-    int age;
-    std::cin >> age;
-    if(age < 0 || age >= 128) {
-        throw WrongAgeException(age);
+
+size_t GetIndex(std::string primer, int SignIndex, bool LeftStart) // or RightEnd
+{
+    int it1 = SignIndex;
+    if (LeftStart) {
+        while ((primer[it1 - 1] >= '0' && primer[it1 - 1] <= '9') || (primer[it1 - 1] == '.' || primer[it1-1] == '-')) {
+            it1--;
+        }
+        return it1;
     }
-    return 0;
+    else
+    {
+        while((primer[it1+1] >= '0' && primer[it1+1] <= '9') || (primer[it1+1] == '-' || primer[it1+1] == '.'))
+        {
+            it1++;
+        }
+
+        return it1;
+    }
 }
-
-int main() {
-    try {
-        RealAge();
-    } catch(const WrongAgeException& ex) {
-        std::cerr << "Age is not correct: " << ex.age << '\n';
-        return 1;
-    } catch(const std::istream::failure& ex) {
-        std::cerr << "Failed to read stream: " << ex.what() << '\n';
-        return 2;
-    } catch(...) {
-        std::cerr << "Unknown exception\n";
-        return 3;
+double GetNum(std::string primer, int SignIndex, bool Left)
+{
+    if(Left)
+    {
+        auto it1 = SignIndex;
+        while ((primer[it1-1] >= '0' && primer[it1-1] <= '9') || primer[it1-1] == '.') {
+            it1--;
+        }
+        bool IsPositive = true;
+        if(it1 > 0)
+        {
+            if(primer[it1-1] == '-') {
+                IsPositive = false;
+            }
+        }
+        double num = 0;
+        while(primer[it1] != '.' && primer[it1] != '*')
+        {
+            num*=10;
+            num+=primer[it1]-48;
+            it1++;
+        }
+        if(primer[it1] == '.')
+        {
+            it1++;
+        }
+        int digits = 1;
+        while(primer[it1] != '*')
+        {
+            num += (primer[it1]-48)*pow(0.1,digits);
+            digits++;
+            it1++;
+        }
+        if(!IsPositive) {
+            num*=-1;
+        }
+        return num;
     }
-    std::cout << "Is real\n";
-    return 0;
-}*/
+    else
+    {
+        bool IsPositive = true;
+        int it1 = SignIndex+1;
+        if(primer[it1] == '-')
+        {
+            IsPositive = false;
+            it1++;
+        }
+        double num = 0;
+        while(primer[it1] <= '9' && primer[it1] >= '0')
+        {
+            num*=10;
+            num+=primer[it1]-48;
+            it1++;
+        }
+        std::cout << "NUM88 = " << num << '\n';
 
+        if(primer[it1] == '.')
+        {
+            it1++;
+        }
+        int digits2 = 1;
+        while(primer[it1] >= '0' && primer[it1] <= '9')
+        {
+            num += (primer[it1]-48)*pow(0.1,digits2);
+            digits2++;
+            it1++;
+        }
+        if(!IsPositive) {
+            num*=-1;
+        }
+        return num;
+    }
+}
 int main() {
     std::string primer;
-	std::getline(std::cin, primer);
-
-
-    auto it1 = primer.find('*');
-    int num = 0;
-    int x = 0;
-    while(primer[it1-1] <= '9' && primer[it1-1] >= '0') {
-        it1--;
-        num += (primer[it1]-48)*pow(10,x);
-        x++;
+    std::getline(std::cin, primer);
+    int I_Backup;
+    std::cout << "primer: " << primer << '\n';
+    int SignIndex = primer.find('*');
+    while(SignIndex != -1) {
+        primer.replace(GetIndex(primer, SignIndex, true), GetIndex(primer, SignIndex, false), std::to_string(GetNum(primer, SignIndex, true)*GetNum(primer, SignIndex, false) ));
+        return 0;
+        SignIndex = primer.find('*');
     }
-    if(it1 != 0 && primer[it1-1]=='-') {
-        num*=-1;
-    }
-    std::cout << num << '\n';
-    int result = num;
-    int Backup_X = x;
-
-    num = 0;
-    it1+=x;
-    x = 0;
-    if(primer[it1+1] == '-') {
-        it1++;
-    }
-    while(primer[it1+1] <= '9' && primer[it1+1] >= '0') {
-        it1++;
-        num *= 10;
-        num += (primer[it1]-48);
-        x++;
-    }
-    if(primer[it1-x] == '-') {
-        num*=-1;
-    }
-    int Backup_X2 = x;
-    std::cout << num << '\n';
-    result*=num;
-    std::cout << primer << '\n';
-    std::cout << Backup_X << "AND" << Backup_X2 << '\n';
-    primer.replace(it1-Backup_X-Backup_X2, it1+1, std::to_string(result));
-    std::cout << "A house of rising sun...: " << it1-Backup_X-Backup_X2 << ' ' << it1+1 << '\n';
-    std::cout << primer << '\n';
     return 0;
-    //проверка на верно введенный пример бы по хорошему
-    //Так, оно умножает (если вводить как человек)
 
+    /*int I_Backup2;
+    IsPositive = true;
+    it1++;
 
+    if(primer[it1] == '-')
+    {
+        IsPositive = false;
+        it1++;
+    }
+    double num2 = 0;
+    while(primer[it1] != '.')
+    {
+        num2*=10;
+        num2+=primer[it1]-48;
+        it1++;
+    }
+    if(primer[it1] == '.')
+    {
+        it1++;
+    }
+    int digits2 = 1;
+    std::cout << "Num2 = " << num2 << '\n';
+    while(primer[it1] >= '0' && primer[it1] <= '9')
+    {
+        num2 += (primer[it1]-48)*pow(0.1,digits2);
+        digits2++;
+        it1++;
+    }
+    I_Backup2 = it1;
+    if(!IsPositive) {
+        num2*=-1;
+    }
+    std::cout << num2 << '\n';
+    std::cout << I_Backup << '\n';
+    std::cout << I_Backup2 << '\n';
+    primer.replace(I_Backup, I_Backup2, std::to_string(num*num2));
+    std::cout << "primer: " << primer << '\n';*/
+
+    return 0;
 }
