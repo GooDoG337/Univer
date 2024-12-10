@@ -1,0 +1,4 @@
+/home/stud-16/Bloxin/Univer/2024.12.10/cmake-build-debug/CMakeFiles/2024_12_10.dir
+/home/stud-16/Bloxin/Univer/2024.12.10/cmake-build-debug/CMakeFiles/tests.dir
+/home/stud-16/Bloxin/Univer/2024.12.10/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/stud-16/Bloxin/Univer/2024.12.10/cmake-build-debug/CMakeFiles/rebuild_cache.dir

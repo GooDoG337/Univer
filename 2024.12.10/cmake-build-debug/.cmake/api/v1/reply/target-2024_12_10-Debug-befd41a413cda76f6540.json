@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "2024_12_09"
+			"path" : "2024_12_10"
 		}
 	],
 	"backtrace" : 1,
@@ -24,7 +24,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 6,
+				"line" : 4,
 				"parent" : 0
 			}
 		]
@@ -49,11 +49,12 @@
 			},
 			"sourceIndexes" : 
 			[
-				0
+				0,
+				1
 			]
 		}
 	],
-	"id" : "2024_12_09::@6890427a1f51a3e7e1df",
+	"id" : "2024_12_10::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -69,8 +70,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "2024_12_09",
-	"nameOnDisk" : "2024_12_09",
+	"name" : "2024_12_10",
+	"nameOnDisk" : "2024_12_10",
 	"paths" : 
 	{
 		"build" : ".",
@@ -82,7 +83,8 @@
 			"name" : "Source Files",
 			"sourceIndexes" : 
 			[
-				0
+				0,
+				1
 			]
 		}
 	],
@@ -92,6 +94,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "main.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "calc.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],
