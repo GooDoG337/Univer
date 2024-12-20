@@ -12,6 +12,7 @@ namespace calculate {
             isPositive = false;
             SignIndex++;
         }
+
         while(expression[SignIndex+1] <= '9' && expression[SignIndex+1] >= '0') {
             num*=10;
             SignIndex++;
@@ -55,15 +56,14 @@ namespace calculate {
         return SignIndex;
     }
 
-    bool IsValid(std::string expression) {
+    bool IsValid(std::string& expression) {
         size_t indx = 0;
         while(indx != expression.size()-1) {
-            indx++;
-            if((expression[indx] > '9' || expression[indx] < '0') && (expression[indx] != '-' && expression[indx] != '+' && expression[indx] != '/' &&expression[indx] != '*'))
-            {
+            if((expression[indx] > '9' || expression[indx] < '0') && (expression[indx] != '-' && expression[indx] != '+' && expression[indx] != '/' &&expression[indx] != '*')) {
                 return false;
             }
+            indx++;
         }
-        return 1;
+        return true;
     }
 } // calculate

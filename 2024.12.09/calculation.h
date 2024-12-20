@@ -11,7 +11,7 @@ namespace calculate {
     size_t GetLeftStart(int SignIndex, std::string expression);
     size_t GetRightEnd(int SignIndex, std::string expression);
 
-    bool IsValid(std::string expression);
+    bool IsValid(std::string& expression);
 } // calculate
 
 #endif //CALCULATION_H

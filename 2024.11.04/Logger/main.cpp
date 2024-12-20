@@ -1,7 +1,7 @@
 #include <iostream>
 #include <utility>
 #include <exception>
-
+#include <memory>
 
 class Logger {
 private:
@@ -74,12 +74,18 @@ public:
         std::cout << "~WellIGuessItLater()\n";
     }
 };
+void sendIn(std::unique_ptr<Logger> x) {
+
+}
 int main() {
-    try {
+
+    /*try {
         C c;
     } catch(const std::exception& ex) {
         std::cerr << "It's maybe error\n";
         return 1;
-    }
+    }*/
+    auto smart = std::make_unique<Logger>();
+    sendIn(std::move(smart));
     return 0;
 }
