@@ -104,6 +104,101 @@ build Second: CXX_EXECUTABLE_LINKER__Second_Debug CMakeFiles/Second.dir/main2.cp
   TARGET_FILE = Second
   TARGET_PDB = Second.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target Third
+
+
+#############################################
+# Order-only phony target for Third
+
+build cmake_object_order_depends_target_Third: phony || .
+
+build CMakeFiles/Third.dir/main3.cpp.o: CXX_COMPILER__Third_unscanned_Debug /home/stud-17/Bloxin/Univer/2024.12.23/main3.cpp || cmake_object_order_depends_target_Third
+  DEP_FILE = CMakeFiles/Third.dir/main3.cpp.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Third.dir
+  OBJECT_FILE_DIR = CMakeFiles/Third.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target Third
+
+
+#############################################
+# Link the executable Third
+
+build Third: CXX_EXECUTABLE_LINKER__Third_Debug CMakeFiles/Third.dir/main3.cpp.o
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles/Third.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = Third
+  TARGET_PDB = Third.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target Four
+
+
+#############################################
+# Order-only phony target for Four
+
+build cmake_object_order_depends_target_Four: phony || .
+
+build CMakeFiles/Four.dir/main4.cpp.o: CXX_COMPILER__Four_unscanned_Debug /home/stud-17/Bloxin/Univer/2024.12.23/main4.cpp || cmake_object_order_depends_target_Four
+  DEP_FILE = CMakeFiles/Four.dir/main4.cpp.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Four.dir
+  OBJECT_FILE_DIR = CMakeFiles/Four.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target Four
+
+
+#############################################
+# Link the executable Four
+
+build Four: CXX_EXECUTABLE_LINKER__Four_Debug CMakeFiles/Four.dir/main4.cpp.o
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles/Four.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = Four
+  TARGET_PDB = Four.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target Five
+
+
+#############################################
+# Order-only phony target for Five
+
+build cmake_object_order_depends_target_Five: phony || .
+
+build CMakeFiles/Five.dir/main5.cpp.o: CXX_COMPILER__Five_unscanned_Debug /home/stud-17/Bloxin/Univer/2024.12.23/main5.cpp || cmake_object_order_depends_target_Five
+  DEFINES = -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_PROGRAM_OPTIONS_NO_LIB
+  DEP_FILE = CMakeFiles/Five.dir/main5.cpp.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/Five.dir
+  OBJECT_FILE_DIR = CMakeFiles/Five.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target Five
+
+
+#############################################
+# Link the executable Five
+
+build Five: CXX_EXECUTABLE_LINKER__Five_Debug CMakeFiles/Five.dir/main5.cpp.o | /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.83.0
+  FLAGS = -g
+  LINK_LIBRARIES = /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.83.0
+  OBJECT_DIR = CMakeFiles/Five.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = Five
+  TARGET_PDB = Five.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -138,7 +233,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /home/stud-17/Bloxin/Univer/2024.12.23/cmake-build-debug
 
-build all: phony 2024_12_23 Second
+build all: phony 2024_12_23 Second Third Four Five
 
 # =============================================================================
 # Built-in targets

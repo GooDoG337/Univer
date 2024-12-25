@@ -6,3 +6,7 @@ FIND_PACKAGE(Boost 1.40 COMPONENTS
 add_executable(2024_12_23 main.cpp)
 TARGET_LINK_LIBRARIES(2024_12_23 Boost::program_options)
 add_executable(Second main2.cpp)
+add_executable(Third main3.cpp)
+add_executable(Four main4.cpp)
+add_executable(Five main5.cpp)
+TARGET_LINK_LIBRARIES(Five Boost::program_options)
