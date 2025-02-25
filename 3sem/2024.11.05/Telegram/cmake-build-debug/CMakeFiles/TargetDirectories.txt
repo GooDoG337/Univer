@@ -1,3 +1,0 @@
-/home/stud-16/Bloxin/Univer/2024.11.05/Telegram/cmake-build-debug/CMakeFiles/Telegram.dir
-/home/stud-16/Bloxin/Univer/2024.11.05/Telegram/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/stud-16/Bloxin/Univer/2024.11.05/Telegram/cmake-build-debug/CMakeFiles/rebuild_cache.dir

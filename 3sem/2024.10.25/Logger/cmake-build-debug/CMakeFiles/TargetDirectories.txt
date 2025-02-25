@@ -1,3 +1,0 @@
-/home/stud-16/Bloxin/Univer/2024.10.25/Logger/cmake-build-debug/CMakeFiles/NewProject.dir
-/home/stud-16/Bloxin/Univer/2024.10.25/Logger/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/stud-16/Bloxin/Univer/2024.10.25/Logger/cmake-build-debug/CMakeFiles/rebuild_cache.dir

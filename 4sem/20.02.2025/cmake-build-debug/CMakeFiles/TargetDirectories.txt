@@ -1,3 +1,0 @@
-/home/stud-17/Bloxin/Univer/4sem/20.02.2025/cmake-build-debug/CMakeFiles/20_02_2025.dir
-/home/stud-17/Bloxin/Univer/4sem/20.02.2025/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/stud-17/Bloxin/Univer/4sem/20.02.2025/cmake-build-debug/CMakeFiles/rebuild_cache.dir

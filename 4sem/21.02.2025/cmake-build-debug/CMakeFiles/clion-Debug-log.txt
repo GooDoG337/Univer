@@ -1,4 +1,0 @@
-/var/home/shishik4life/Приложения/JetBrains/Apps/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "Unix Makefiles" -S /home/shishik4life/Приложения/JetBrains/Codes/Univer/4sem/21.02.2025 -B /home/shishik4life/Приложения/JetBrains/Codes/Univer/4sem/21.02.2025/cmake-build-debug
--- Configuring done (0.0s)
--- Generating done (0.0s)
--- Build files have been written to: /home/shishik4life/Приложения/JetBrains/Codes/Univer/4sem/21.02.2025/cmake-build-debug
