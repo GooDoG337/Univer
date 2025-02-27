@@ -1,66 +1,123 @@
 #include <iostream>
 #include <regex>
 #include <string>
+enum class operation{none, plus, minus, times, divide};
 
-void ReturnSign() {};
-
-/*void ExpressionResult(const std::string& expr) {
-    auto indx = std::find(expr.begin(), expr.end(), '+')+1;
-    int rvalue = 0;
-    for(auto lsearch = indx; lsearch < expr.end()-1; ++lsearch) {
-        lvalue*=10;
-        lvalue += *rsearch-48;
-    }
-    std::cout << "AND " << lvalue << '\n';
-    int rvalue = 0;
-    for(auto rsearch = expr.begin(); rsearch < indx-1; ++rsearch) {
-        rvalue*=10;
-        lvalue += *lsearch-48;
-    }
-    std::cout << "SHIT: " << lvalue << '\n';
-} САМОЕ ТУПОЕ *** НА ЗЕМЛЕ
-*/
-void ExpressionResult(const std::string& expr) {
-    std::regex r {R"(\d+)"};
+operation ExpressionOperation(const std::string& str)
+{
+    if (str.find('*') != std::string::npos) return operation::times;
+    if (str.find('/') != std::string::npos) return operation::divide;
+    if (str.find('+') != std::string::npos) return operation::plus;
+    if (str.find('-') != std::string::npos) return operation::minus;
+    return operation::none;
+}
+int ExpressionResult(const std::string& expr, operation op) {
     std::smatch result;
-    std::regex_search(expr, result, r);
+    std::regex_search(expr, result, std::regex{"^\\d+"});
+    //std::cout << "SHIUT: " << expr << std::endl;
     int lvalue = 0;
-    for(auto itm:result.str()) {
+    for(const char& itm:result.str()) {
         lvalue*=10;
         lvalue += itm-48;
     }
+    //std::cout << "expr: " << expr << std::endl;
+
+    std::regex_search(expr, result, std::regex{"\\d+$"});
     int rvalue = 0;
-std::cout << "lvalue: " << lvalue << '\n';
+    for(const char& itm:result.str()) {
+        rvalue*=10;
+        rvalue += itm-48;
+    }
+    switch (ExpressionOperation(expr))
+    {
+    case operation::times:
+        return lvalue * rvalue;
+    case operation::plus:
+        return lvalue + rvalue;
+    case operation::minus:
+        return lvalue - rvalue;
+
+    case operation::divide:
+        return lvalue / rvalue;
+    default:
+        throw std::invalid_argument("invalid operation");
+    }
 }
 int main() {
-    /*std::string str{"MSU Baku"}{"I love MSU Baku?"};
-    std::regex r/*{"(MSU)(.*)"}{"MSU[a-z, A-Z, ]?"};
-    std::regex_replace(str,r, "Low... Lomonosov univer?");
-    if(std::regex_match(str,r)) {
-        std::cout << "I don't see the text, but I have to print\n";
-    }
-    if(std::regex_match(str.begin(),str.end(),r)) {
-        std::cout << "Another one bites the dust?";
-    }
-
-    std::smatch result;
-    std::regex_search(str, result, r);
-    for(auto x:result) {
-        std::cout << x << '\n';
-    }*/
     std::string expression;
-    std::regex r {R"( *\d+ *(\+|\-|\*|\/) *\d+ *)"};
+    //std::regex r {R"( *\d+ *(\+|\-|\*|\/) *\d+ *)"};
+    std::regex r {R"( *\d+ *\* *\d+ *)"};
+    //std::regex r {R"( *\d+ *\+ *\d+ *)"};
     std::cout << "Enter expression";
     std::getline(std::cin, expression);
     std::smatch result;
     std::regex_search(expression, result, r);
-    for(auto i: result) {
-        std::cout << i;
+    operation op = ExpressionOperation(expression);
+    while (op != operation::none)
+    {
+        try
+        {
+            ExpressionResult(result.str(), op);
+        } catch (...)
+        {
+            break;
+        }
+        expression.replace(expression.find(result.str()), result.str().length(), std::to_string(ExpressionResult(result.str(), op)));
+        std::regex_search(expression, result, r);
+        op = ExpressionOperation(expression);
     }
-    std::cout << "SHIT\n";
-    ExpressionResult(result.str());
-
-
+    std::cout << "Expression end: " << expression << std::endl;
+    r = {R"( *\d+ *\/ *\d+ *)"};
+    std::regex_search(expression, result, r);
+    op = ExpressionOperation(expression);
+    while (op != operation::none)
+    {
+        try
+        {
+            ExpressionResult(result.str(), op);
+        } catch (...)
+        {
+            break;
+        }
+        expression.replace(expression.find(result.str()), result.str().length(), std::to_string(ExpressionResult(result.str(), op)));
+        std::regex_search(expression, result, r);
+        op = ExpressionOperation(expression);
+    }
+    std::cout << "Expression end: " << expression << std::endl;
+    r = {R"( *\d+ *\+ *\d+ *)"};
+    std::regex_search(expression, result, r);
+    op = ExpressionOperation(expression);
+    while (op != operation::none)
+    {
+        try
+        {
+            ExpressionResult(result.str(), op);
+        } catch (...)
+        {
+            break;
+        }
+        expression.replace(expression.find(result.str()), result.str().length(), std::to_string(ExpressionResult(result.str(), op)));
+        std::regex_search(expression, result, r);
+        op = ExpressionOperation(expression);
+    }
+    std::cout << "Expression end: " << expression << std::endl;
+    r = {R"( *\d+ *\+ *\d+ *)"};
+    std::regex_search(expression, result, r);
+    op = ExpressionOperation(expression);
+    while (op != operation::none)
+    {
+        try
+        {
+            ExpressionResult(result.str(), op);
+        } catch (...)
+        {
+            break;
+        }
+        expression.replace(expression.find(result.str()), result.str().length(), std::to_string(ExpressionResult(result.str(), op)));
+        std::regex_search(expression, result, r);
+        op = ExpressionOperation(expression);
+    }
+    std::cout << "Expression end: " << expression << std::endl;
     return 0;
 }
 
