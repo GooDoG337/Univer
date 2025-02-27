@@ -11,23 +11,62 @@ operation ExpressionOperation(const std::string& str)
     if (str.find('-') != std::string::npos) return operation::minus;
     return operation::none;
 }
-int ExpressionResult(const std::string& expr, operation op) {
+double ExpressionResult(const std::string& expr, operation op) {
+    std::cout << expr << std::endl;
     std::smatch result;
-    std::regex_search(expr, result, std::regex{"^\\d+"});
+    std::regex_search(expr, result, std::regex{R"(^\d*[\.]?\d*)"});
     //std::cout << "SHIUT: " << expr << std::endl;
-    int lvalue = 0;
-    for(const char& itm:result.str()) {
-        lvalue*=10;
-        lvalue += itm-48;
+    double lvalue = 0;
+    bool dotdigits = false;
+    double drob = 0.1;
+    for (const auto& i : result.str())
+    {
+        if (i == '.')
+        {
+            dotdigits = true;
+        }
+        else
+        {
+            if (!dotdigits)
+            {
+                lvalue*=10;
+                lvalue += i-48;
+            }
+            if (dotdigits)
+            {
+                lvalue += (i-48)*drob;
+                drob/=10;
+            }
+        }
     }
-    //std::cout << "expr: " << expr << std::endl;
+    std::cout << "lvalue: " << lvalue << std::endl;
 
-    std::regex_search(expr, result, std::regex{"\\d+$"});
-    int rvalue = 0;
-    for(const char& itm:result.str()) {
-        rvalue*=10;
-        rvalue += itm-48;
+    std::regex_search(expr, result, std::regex{R"(\d*[\.]?\d*$)"});
+    double rvalue = 0;
+    dotdigits = false;
+    drob = 0.1;
+    for (const auto& i : result.str())
+    {
+        if (i == '.')
+        {
+            dotdigits = true;
+        }
+        else
+        {
+            if (!dotdigits)
+            {
+                rvalue*=10;
+                rvalue += i-48;
+            }
+            if (dotdigits)
+            {
+                rvalue += (i-48)*drob;
+                drob/=10;
+            }
+        }
     }
+    std::cout << "rvalue: " << rvalue << std::endl;
+
     switch (ExpressionOperation(expr))
     {
     case operation::times:
@@ -46,7 +85,7 @@ int ExpressionResult(const std::string& expr, operation op) {
 int main() {
     std::string expression;
     //std::regex r {R"( *\d+ *(\+|\-|\*|\/) *\d+ *)"};
-    std::regex r {R"( *\d+ *\* *\d+ *)"};
+    std::regex r {R"( *\d*[\.]?\d* *\* *\d*[\.]?\d* *)"};
     //std::regex r {R"( *\d+ *\+ *\d+ *)"};
     std::cout << "Enter expression";
     std::getline(std::cin, expression);
@@ -67,7 +106,7 @@ int main() {
         op = ExpressionOperation(expression);
     }
     std::cout << "Expression end: " << expression << std::endl;
-    r = {R"( *\d+ *\/ *\d+ *)"};
+    r = {R"( *\d*[\.]?\d* *\/ *\d*[\.]?\d* *)"};
     std::regex_search(expression, result, r);
     op = ExpressionOperation(expression);
     while (op != operation::none)
@@ -84,7 +123,7 @@ int main() {
         op = ExpressionOperation(expression);
     }
     std::cout << "Expression end: " << expression << std::endl;
-    r = {R"( *\d+ *\+ *\d+ *)"};
+    r = {R"( *\d*[\.]?\d* *\+ *\d*[\.]?\d* *)"};
     std::regex_search(expression, result, r);
     op = ExpressionOperation(expression);
     while (op != operation::none)
@@ -101,7 +140,7 @@ int main() {
         op = ExpressionOperation(expression);
     }
     std::cout << "Expression end: " << expression << std::endl;
-    r = {R"( *\d+ *\+ *\d+ *)"};
+    r = {R"( *\d*[\.]?\d* *\- *\d*[\.]?\d* *)"};
     std::regex_search(expression, result, r);
     op = ExpressionOperation(expression);
     while (op != operation::none)
