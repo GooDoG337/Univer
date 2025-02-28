@@ -12,18 +12,22 @@ operation ExpressionOperation(const std::string& str)
     return operation::none;
 }
 double ExpressionResult(const std::string& expr, operation op) {
-    std::cout << expr << std::endl;
+    std::cout << "exprshit: " << expr << std::endl;
     std::smatch result;
-    std::regex_search(expr, result, std::regex{R"(^\d*[\.]?\d*)"});
+    std::regex_search(expr, result, std::regex{R"(^[\-]?\d*[\.]?\d*)"});
     //std::cout << "SHIUT: " << expr << std::endl;
     double lvalue = 0;
     bool dotdigits = false;
     double drob = 0.1;
+    bool positive = true;
     for (const auto& i : result.str())
     {
         if (i == '.')
         {
             dotdigits = true;
+        }
+        else if(i == '-') {
+            positive = false;
         }
         else
         {
@@ -39,17 +43,22 @@ double ExpressionResult(const std::string& expr, operation op) {
             }
         }
     }
+    if(!positive) lvalue*=-1;
     std::cout << "lvalue: " << lvalue << std::endl;
 
-    std::regex_search(expr, result, std::regex{R"(\d*[\.]?\d*$)"});
+    std::regex_search(expr, result, std::regex{R"([\-]?\d*[\.]?\d*$)"});
     double rvalue = 0;
     dotdigits = false;
+    positive = true;
     drob = 0.1;
     for (const auto& i : result.str())
     {
         if (i == '.')
         {
             dotdigits = true;
+        }
+        else if(i == '-') {
+            positive = false;
         }
         else
         {
@@ -65,6 +74,7 @@ double ExpressionResult(const std::string& expr, operation op) {
             }
         }
     }
+    if(!positive) rvalue*=-1;
     std::cout << "rvalue: " << rvalue << std::endl;
 
     switch (ExpressionOperation(expr))
@@ -75,7 +85,6 @@ double ExpressionResult(const std::string& expr, operation op) {
         return lvalue + rvalue;
     case operation::minus:
         return lvalue - rvalue;
-
     case operation::divide:
         return lvalue / rvalue;
     default:
@@ -85,7 +94,8 @@ double ExpressionResult(const std::string& expr, operation op) {
 int main() {
     std::string expression;
     //std::regex r {R"( *\d+ *(\+|\-|\*|\/) *\d+ *)"};
-    std::regex r {R"( *\d*[\.]?\d* *\* *\d*[\.]?\d* *)"};
+    //ОНО ДАЖЕ НЕ РАБОТАЕТ С ЛУК БЕХАЙНДАМИ, КРУТО
+    std::regex r {R"([\-]?\d*[\.]?\d* *\* *[\-]?\d*[\.]?\d* *)"};
     //std::regex r {R"( *\d+ *\+ *\d+ *)"};
     std::cout << "Enter expression";
     std::getline(std::cin, expression);
@@ -113,12 +123,11 @@ int main() {
     {
         try
         {
-            ExpressionResult(result.str(), op);
+        expression.replace(expression.find(result.str()), result.str().length(), std::to_string(ExpressionResult(result.str(), op)));
         } catch (...)
         {
             break;
         }
-        expression.replace(expression.find(result.str()), result.str().length(), std::to_string(ExpressionResult(result.str(), op)));
         std::regex_search(expression, result, r);
         op = ExpressionOperation(expression);
     }
@@ -140,7 +149,7 @@ int main() {
         op = ExpressionOperation(expression);
     }
     std::cout << "Expression end: " << expression << std::endl;
-    r = {R"( *\d*[\.]?\d* *\- *\d*[\.]?\d* *)"};
+    r = {R"([\-]?*\d*[\.]?\d* *\- *\d*[\.]?\d* *)"};
     std::regex_search(expression, result, r);
     op = ExpressionOperation(expression);
     while (op != operation::none)
@@ -156,7 +165,9 @@ int main() {
         std::regex_search(expression, result, r);
         op = ExpressionOperation(expression);
     }
-    std::cout << "Expression end: " << expression << std::endl;
+    if(std::regex_match(expression,std::regex{"[\\-]?\\d*[\\.]?\\d*"})) {
+        std::cout << "Expression end: " << expression << std::endl;
+    } else std::cout << "Something REALLY was wrong\n";
     return 0;
 }
 
