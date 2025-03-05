@@ -1,0 +1,24 @@
+{
+    "name":"Ivan",
+    "age":15,
+    "isGoodStudent":false
+}
+
+{
+    "name":"noIvan",
+    "address": {
+        "city":"Baku",
+        "metroStation":"Azadliq",
+        "postal code":12345
+        },
+    "phone numbers":[
+        {
+            "type":"mobile",
+            "number":123456
+        },
+        {
+            "type":"home"
+            "number":1111
+        }
+    ]
+}
