@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.29)
+project(plagiatcode)
+option(BUILD_SHARED_LIBS "Build using shared libraries " ON)
+add_library(Tokenizer Tokenizer.cpp)
+target_include_directories(Tokenizer PUBLIC ${MAKE_SOURCE_DIR})
+add_executable(plagiatcode main.cpp JSONNode.cpp JSONParser.cpp)
+target_link_libraries(plagiatcode PRIVATE JSONNode)
