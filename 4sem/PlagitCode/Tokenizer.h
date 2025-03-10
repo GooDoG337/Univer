@@ -1,4 +1,9 @@
-#include "Tokenizer.h"
+#include <fstream>
+#include <vector>
+#include <map>
+#include <stdexcept>
+#include <stack>
+#include <iostream>
 enum class TOKEN
 {
     CURLY_OPEN,

@@ -1,4 +1,6 @@
-#include "JSONNode.h"
+#include <map>
+#include <memory>
+#include <vector>
 
 namespace JSON {
 class JSONNode;

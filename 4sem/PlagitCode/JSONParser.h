@@ -1,4 +1,6 @@
-#include "JSONParser.h"
+#include "JSONNode.h"
+#include "Tokenizer.h"
+#include <memory>
 
 class JSONParser {
   std::fstream file;
