@@ -1,6 +1,7 @@
 #include <fstream>
 #include <stdexcept>
 #include <iostream>
+
 enum class TOKEN
 {
     CURLY_OPEN,
@@ -65,7 +66,7 @@ struct Token
         {
             return "Null";
         }
-
+               
         }
     }
 };
@@ -219,6 +220,6 @@ public:
         {}: Object
         []: List
         num: number
-
+        
      */
 };
