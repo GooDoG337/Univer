@@ -53,6 +53,7 @@ void PrintGeolocation() {
 	}
 	std::cout << "--------------------------------\n";
 	sleep(0.1);
+		system("reset");
 }
 }
 
@@ -67,7 +68,6 @@ void PrintSituation() {
 	sleep(0.1);
 	}
 }
-
 class Train {
 public:
 	enum situation{RIDING, STILL};
@@ -78,29 +78,43 @@ public:
 	direction TrainDirection = FORWARD;
 	Train(char id1):id(id1){};
 	void TrainMovement(char to) {
+		std::unique_lock<std::timed_mutex> lock(mtx, std::defer_lock);
 		Geolocation[id] = location;
 		if(location < to) {
 			TrainDirection = FORWARD;
-			stations[location].setForwardHere(id);
+			while(!lock.try_lock()) {
+				std::cout << "Ему очень херово\n";
+				sleep(1);
+			}			stations[location].setForwardHere(id);
 		} else if(location > to){
 			TrainDirection = BACKWARD;
-			stations[location].setBackHere(id);
+			while(!lock.try_lock()) {
+				std::cout << "Ему очень херово\n";
+				sleep(1);
+			}			stations[location].setBackHere(id);
 		} else {
 			TrainSituation = RIDING;
 			if(TrainDirection == FORWARD)
 			{
 				stations[location].setForwardHere(0);
+				lock.unlock();
 				Geolocation[id] = location+0.5;
 				sleep(stations[location].timeForward);
 				Geolocation[id] = location;
-
-				stations[location].setBackHere(id);
+				while(!lock.try_lock()) {
+					std::cout << "Ему очень херово\n";
+					sleep(1);
+				}				stations[location].setBackHere(id);
 			} else {
 				stations[location].setBackHere(0);
+				lock.unlock();
 				Geolocation[id] = location+0.5;
 				sleep(stations[location].timeBack);
 				Geolocation[id] = location;
-				stations[location].setForwardHere(id);
+				while(!lock.try_lock()) {
+					std::cout << "Ему очень херово\n";
+					sleep(1);
+				}				stations[location].setForwardHere(id);
 			}
 		}
 		while(to != location) {
@@ -109,18 +123,27 @@ public:
 			TrainSituation = RIDING;
 			if(TrainDirection == FORWARD) {
 				stations[location].setForwardHere(0);
+				lock.unlock();
 				Geolocation[id] = location+0.5;
 				sleep(stations[location].timeForward);
 				location++;
 				Geolocation[id] = location;
-				stations[location].setForwardHere(id);
+				while(!lock.try_lock()) {
+					std::cout << "Ему очень херово\n";
+					sleep(1);
+				}				stations[location].setForwardHere(id);
 			} else{
 				stations[location].setBackHere(0);
+				lock.unlock();
 				Geolocation[id] = location-0.5;
 				sleep(stations[location].timeBack);
 				location--;
 				Geolocation[id] = location;
 				stations[location].setBackHere(id);
+				while(!lock.try_lock()) {
+					std::cout << "Ему очень херово\n";
+					sleep(1);
+				}
 			}
 		}
 		sleep(stations[location].timeIn);
@@ -128,15 +151,15 @@ public:
 };
 
 
-std::array<Train,2> trains {1,2};
+std::array<Train,7> trains {1,2,3,4,5,6,7};
 
 void CircleRun(Train train) {
 	while(true)
 	{
 		train.TrainMovement(5);
-		train.TrainMovement(5);
+		/*train.TrainMovement(5);
 		train.TrainMovement(0);
-		train.TrainMovement(0);
+		train.TrainMovement(0);*/
 	}
 }
 
@@ -145,14 +168,16 @@ void BeautifulRun() {
 	std::thread t1(CircleRun, trains[0]);
 	sleep(1);
 	std::thread t2(CircleRun, trains[1]);
+	sleep(1);
+	std::thread t4(CircleRun, trains[2]);
 	t1.join();
 	t2.join();
 	t3.join();
+	t4.join();
 }
 
 
 int main() {
-	std::cout << std::thread::hardware_concurrency() << '\n';
 	BeautifulRun();
 	return 0;
 }
