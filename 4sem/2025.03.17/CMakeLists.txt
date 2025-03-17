@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.29)
+project(2025_03_17)
+option(BUILD_SHARED_LIBS "Build using shared libraries " ON)
+set(CMAKE_CXX_STANDARD 26)
+add_executable(2025_03_17 main.cpp)

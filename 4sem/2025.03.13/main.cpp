@@ -176,7 +176,6 @@ public:
 		{
 			ForwardLock = std::make_shared<std::unique_lock<std::mutex>>(*stations[ToRide][location].ForwardMutex, std::defer_lock);
 		}
-		
 			while(to != location && TrainDirection == FORWARD) {
 				if(ForwardLock.get()->try_lock())
 				{
@@ -206,10 +205,6 @@ public:
 			}
 
 			while(to != location && TrainDirection == BACKWARD) {
-				if(location < 0)
-				{
-					location = 0;
-				}
 				if(BackwardLock.get()->try_lock())
 				{
 					stations[WhereRide][location].setBackHere(id);
@@ -223,10 +218,7 @@ public:
 					BackwardLock.get()->unlock();
 				} else { throw std::logic_error("KALI LINUX"); }
 				std::this_thread::sleep_for(std::chrono::seconds(stations[WhereRide][location].timeBack));
-				if(location != 0)
-				{
-					location--;
-				}
+				location--;
 				BackwardLock = std::make_shared<std::unique_lock<std::mutex>>(*stations[ToRide][location].BackwardMutex, std::defer_lock);
 			}
 	}
@@ -252,17 +244,12 @@ public:
 
 };
 void CircleRun(Train train) {
-	while(true) {
-		train.TrainMovement(stations[RED].size()-1,RED);
-		train.TrainMovement(stations[RED].size()-1,RED);
-		train.TrainMovement(0,RED);
-		train.TrainMovement(0, COMMON);
-		train.TrainMovement(0, COMMON);
-		train.TrainMovement(stations[COMMON].size()-1, COMMON);
+		train.TrainMovement(stations[RED].size(),RED);
+		train.ReverseMove();
+		//train.TrainMovement(0,RED);
 	}
-}
 
-void CircleRun2(Train train) {
+void CircleRunLight_Green(Train train) {
 	while(true)
 	{
 		train.TrainMovement(stations[LIGHT_GREEN].size(),LIGHT_GREEN);
@@ -271,14 +258,14 @@ void CircleRun2(Train train) {
 		train.ReverseMove();
 	}
 }
-void CircleRun3(Train train) {
-	while(true)
-	{
-		train.TrainMovement(stations[PURPLE].size(),PURPLE);
+void CircleRunPurple(Train train) {
+	while(true) {
+		train.TrainMovement(stations[PURPLE].size()-1,PURPLE);
 		train.ReverseMove();
 		train.TrainMovement(0,PURPLE);
 		train.TravelToSinglePlatform();
-	}						///ФИОЛЕТОВАЯ ЛИНИЯ, В ПЛАНАХ ДОДЕЛАТЬ ВОКЗАЛ  И СМЕНУ ТОЧКИ НАЗНАЧЕНИЯ С ВОКЗАЛА НА ХОДЖАСАН И ОБРАТНО
+	}
+						///ФИОЛЕТОВАЯ ЛИНИЯ, В ПЛАНАХ ДОДЕЛАТЬ ВОКЗАЛ  И СМЕНУ ТОЧКИ НАЗНАЧЕНИЯ С ВОКЗАЛА НА ХОДЖАСАН И ОБРАТНО
 
 /*	while(true)
 	{
@@ -298,7 +285,7 @@ void CircleRunGreen(Train train) {
 }
 int main() {
 	//std::thread t1(CircleRun2, Train(1, LIGHT_GREEN));
-	std::thread t1(CircleRun3, Train(1, PURPLE));
+	std::thread t1(CircleRunLight_Green, Train(1, LIGHT_GREEN));
 	//std::thread t1(CircleRun2, Train(1, LIGHT_GREEN));
 	t1.join();
 
