@@ -398,16 +398,19 @@ void CircleRun_Green(int id) {
 	Train train(id, RedGreen_DEPO);
 	train.TrainMovement(stations[RedGreen_DEPO].size(), RedGreen_DEPO);
 	train.TransferLine(COMMON, 7); //6 v common
+	Way change = GREEN;
 	while(true)
 	{
 		train.TrainMovement(stations[COMMON].size(), COMMON);
-		train.TransferLine(GREEN);
-		train.TrainMovement(stations[RED].size(), GREEN);
+		train.TransferLine(change);
+		train.TrainMovement(stations[change].size(), change);
 		train.ReverseMove();
-		train.TrainMovement(-1, GREEN);
+		train.TrainMovement(-1, change);
 		train.TransferLine(COMMON);
 		if(!train.TrainMovement(-1, COMMON)) {
 			train.ReverseMove();
+			if(change == RED) {change = GREEN;}
+			else {change = RED;}
 		} else { break; }
 	}
 	train.TransferLine(RedGreen_DEPO); //6 v common
@@ -459,17 +462,19 @@ void CircleRun_Red(int id) {
 	Train train(id, RedGreen_DEPO);
 	train.TrainMovement(stations[RedGreen_DEPO].size(), RedGreen_DEPO);
 	train.TransferLine(COMMON, 7); //6 v common
+	Way change = RED;
 	while(true)
 	{
 		train.TrainMovement(stations[COMMON].size(), COMMON);
-		train.TransferLine(RED);
-		train.TrainMovement(stations[RED].size(), RED);
+		train.TransferLine(change);
+		train.TrainMovement(stations[change].size(), change);
 		train.ReverseMove();
-		train.TrainMovement(-1, RED);
+		train.TrainMovement(-1, change);
 		train.TransferLine(COMMON);
 		if(!train.TrainMovement(-1, COMMON)) {
-			std::cout << "WHERE IN BLOODY HELL\n";
 			train.ReverseMove();
+			if(change == RED) {change = GREEN;}
+			else {change = RED;}
 		} else { break; }
 	}
 	train.TransferLine(RedGreen_DEPO); //6 v common
@@ -478,9 +483,8 @@ void CircleRun_Red(int id) {
 }
 int main() {
 	//std::thread t1(CircleRun2, Train(1, LIGHT_GREEN));
-	std::thread t1(CircleRun_Purple, 1);
-	std::this_thread::sleep_for(std::chrono::seconds(1));
-	std::thread t2(CircleRun_Purple, 2);
+	std::thread t1(CircleRun_Green, 1);
+	/*std::thread t2(CircleRun_Purple, 2);
 	std::this_thread::sleep_for(std::chrono::seconds(1));
 	std::thread t3(CircleRun_Purple, 3);
 	std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -488,14 +492,14 @@ int main() {
 	std::this_thread::sleep_for(std::chrono::seconds(1));
 	std::thread t5(CircleRun_Purple, 5);
 	std::this_thread::sleep_for(std::chrono::seconds(1));
-	std::thread t6(CircleRun_Purple, 6);
+	std::thread t6(CircleRun_Purple, 6);*/
 	//std::thread t1(CircleRun2, Train(1, LIGHT_GREEN));
 	t1.join();
-	t2.join();
+	/*t2.join();
 	t3.join();
 	t4.join();
 	t5.join();
-	t6.join();
+	t6.join();*/
 	//std::this_thread::sleep_for(std::chrono::seconds(1));
 	//std::thread t1(CircleRun3, Train(2, LIGHT_GREEN));
 	//std::this_thread::sleep_for(std::chrono::seconds(1));
