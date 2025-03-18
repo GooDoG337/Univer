@@ -115,6 +115,8 @@ std::vector<std::vector<TrainStation>> stations {
 void PrintGeolocation() {
 	while(true)
 	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		system("reset");
 	std::cout << "---------------------------------\n";
 	for(auto& i: stations) {
 		std::cout << "--------------------------------\n";
@@ -132,7 +134,7 @@ void PrintGeolocation() {
 
 	}
 	std::cout << "--------------------------------\n";
-	sleep(1);
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	system("reset");
 }
 }
@@ -143,7 +145,7 @@ private:
 	std::shared_ptr<std::unique_lock<std::mutex>> ForwardLock;
     std::shared_ptr<std::unique_lock<std::mutex>> BackwardLock;
 public:
-	char WhenHome = 0;
+	char WhenHome = 127;
 	char id = 0;
 	char location = 0;
 	Way WhereRide = RED;
@@ -158,7 +160,7 @@ public:
 		location = loca;
 		ForwardLock = std::make_shared<std::unique_lock<std::mutex>>(*stations[ride][location].ForwardMutex, std::defer_lock);
 	}
-	void TransferLine(Way TransferTo, char loc = 0) {
+	void TransferLine(Way TransferTo, char loc = 0, bool AZI = false) {
 		WhereRide = TransferTo;
 		if(TrainDirection == FORWARD)
 		{
@@ -168,6 +170,9 @@ public:
 			location = stations[TransferTo].size()-1;
 		} else {
 			location = loc;
+		}
+		if(AZI) {
+			TrainDirection = BACKWARD;
 		}
 	}
 	void ReverseMove()
@@ -477,24 +482,96 @@ void CircleRun_Red(int id) {
 			else {change = RED;}
 		} else { break; }
 	}
-	train.TransferLine(RedGreen_DEPO); //6 v common
+	train.TransferLine(RedGreen_DEPO,1); //6 v common
 	train.TravelToSinglePlatform();
 	train.TravelToSinglePlatform_BACKWARD();		//Без возврата на путь
 }
-int main() {
+
+
+void CircleRun_Azi(int id) {
+	Train train(id, RedGreen_DEPO);
+	train.TrainMovement(stations[RedGreen_DEPO].size(), RedGreen_DEPO);
+	train.TransferLine(COMMON, 6, true); //6 v common
+	train.TrainMovement(-1, COMMON);
+	train.ReverseMove();
+	//train.ReverseMove();
+		//Без возврата на путь
+}
+
+void MetroWakesUp() {
 	//std::thread t1(CircleRun2, Train(1, LIGHT_GREEN));
-	std::thread t1(CircleRun_Green, 1);
-	/*std::thread t2(CircleRun_Purple, 2);
+	/*std::thread t1(CircleRun_Green, 1);
 	std::this_thread::sleep_for(std::chrono::seconds(1));
-	std::thread t3(CircleRun_Purple, 3);
+	std::thread t2(CircleRun_Red, 2);
 	std::this_thread::sleep_for(std::chrono::seconds(1));
-	std::thread t4(CircleRun_Purple, 4);
+	std::thread t3(CircleRun_Green, 3);
 	std::this_thread::sleep_for(std::chrono::seconds(1));
-	std::thread t5(CircleRun_Purple, 5);
+	std::thread t4(CircleRun_Red, 4);
 	std::this_thread::sleep_for(std::chrono::seconds(1));
-	std::thread t6(CircleRun_Purple, 6);*/
-	//std::thread t1(CircleRun2, Train(1, LIGHT_GREEN));
+	std::thread t5(CircleRun_Green, 5);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::thread t6(CircleRun_Red, 6);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::thread t7(CircleRun_Green, 7);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::thread t8(CircleRun_Red, 8);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::thread t9(CircleRun_Green, 9);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::thread t10(CircleRun_Red, 10);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::thread t11(CircleRun_Green, 11);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::thread t12(CircleRun_Red, 12);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::thread t13(CircleRun_Green, 13);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::thread t14(CircleRun_Red, 14);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::thread t15(CircleRun_Green, 15);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::thread t16(CircleRun_Red, 16);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::thread t17(CircleRun_Green, 17);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::thread t18(CircleRun_Red, 18);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::thread t19(CircleRun_Green, 19);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::thread t20(CircleRun_Red, 20);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::thread t21(CircleRun_Green, 21);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::thread t22(CircleRun_Red, 22);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::thread t23(CircleRun_Green, 23);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::thread t24(CircleRun_Red, 24);
+	std::this_thread::sleep_for(std::chrono::seconds(1));
 	t1.join();
+	t2.join();
+	t3.join();
+	t4.join();
+	t5.join();
+	t6.join();
+	t7.join();
+	t8.join();
+	t9.join();
+	t10.join();
+	t11.join();
+	t12.join();
+	t13.join();
+	t14.join();
+	t15.join();
+	t16.join();
+	t17.join();
+	t18.join();
+	t19.join();
+	t20.join();
+	t21.join();
+	t22.join();
+	t23.join();
+	t24.join();*/
 	/*t2.join();
 	t3.join();
 	t4.join();
@@ -511,4 +588,11 @@ int main() {
 	t4.join();
 	t5.join();
 	t6.join();*/
+	std::thread t1(CircleRun_Azi, 1);
+	t1.join();
+}
+
+int main() {
+	//std::thread t0(PrintGeolocation);
+	MetroWakesUp();
 }
