@@ -53,9 +53,9 @@ out << s1.arg(n) << Qt::endl;
 QString s2 = "There will be %1 nixpkgs";
 double num = 777;
 out << s2.arg(num) << Qt::endl;
-QString s3 = "Well, nums are: %1 and %2";
+QString s3 = "Well, nums are: %2 and %3";
 QString str("NOT NUM");
 QString str2("WHERE NUM?");
-out << s3.arg(str).arg(str2) << Qt::endl;
+out << s3.arg(str,str2) << Qt::endl;
     return 0;
 }
